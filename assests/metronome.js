@@ -29,6 +29,8 @@ let updateMetronome = function () {
   Tone.Transport.bpm.value = tempoSlider.value;
 };
 
+// todo modify array to change time signature with user input
+
 let synth;
 let loop = new Tone.Sequence(
   function (time, col) {
