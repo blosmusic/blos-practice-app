@@ -22,10 +22,18 @@ body {
     user-select: none;
 }
 
+.timer-display,
+.bpm-display {
+    font-size: 50px;
+    font-weight: bold;
+}
+
 .metronome-container {
     width: auto;
 }
 
+.timer-btn-start,
+.timer-btn-reset,
 .onoff-button {
     width: 100px;
     height: 100px;
@@ -49,10 +57,6 @@ body {
 
 .beat-container {
     width: auto;
-}
-
-.bpm-display {
-    font-size: 50px;
 }
 
 .bpm-container {
