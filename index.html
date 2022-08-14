@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assests/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.40/Tone.js"></script>
+    <title>Practice Tools</title>
+</head>
+
+<body>
+    <section class="hero">
+        <nav>
+
+        </nav>
+        <h1>BLOS Practice App V1.0</h1>
+    </section>
+
+    <main>
+        <div class="tuner-section" id="tuner">
+
+        </div>
+
+        <div class="timer-section" id="timer">
+
+        </div>
+
+        <div class="metronome-section" id="metronome">
+            <h2>METRONOME</h2>
+            <div class="metronome-container">
+                <button class="onoff-button" id="onoff-button">START</button>
+                <div class="beat-container">
+                    <h2>BEAT</h2>
+                </div>
+                <div class="bpm-container">
+                    <span class="bpm-display" id="bpm-display"></span>
+                    <div class="tempo-slider-container">
+                        <div class="adjust-tempo-btn decrease-tempo" id="decrease-tempo">-</div>
+                        <input class="slider" id="tempo-slider" type="range" min="50" max="300" value="80">
+                        <div class="adjust-tempo-btn increase-tempo" id="increase-tempo">+</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+</body>
+<script src="./assests/metronome.js"></script>
+
+</html>

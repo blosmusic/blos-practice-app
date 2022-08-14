@@ -1,0 +1,128 @@
+body {
+    background-color: #f2f2f2;
+    font-family: 'Open Sans', sans-serif;
+    color: black;
+}
+
+.metronome-section {
+    width: 100vu;
+    height: 100vu;
+    padding: 10px;
+    background-color: black;
+    color: #00ff91;
+    opacity: 0.8;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+
+.metronome-container {
+    width: auto;
+}
+
+.onoff-button {
+    width: 100px;
+    height: 100px;
+    background-color: black;
+    border: 1px solid #00ff91;
+    border-radius: 50%;
+    color: #00ff91;
+    font-weight: bolder;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.onoff-button:hover {
+    background-color: #00ff91;
+    color: black;
+    transition: .2s;
+}
+
+.beat-container {
+    width: auto;
+}
+
+.bpm-display {
+    font-size: 50px;
+}
+
+.bpm-container {
+    width: 150px;
+    height: 30px;
+    background-color: black;
+    color: #00ff91;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.tempo-slider-container {
+    justify-content: center;
+    display: flex;
+    font-size: 20px;
+}
+
+.tempo-slider {
+    background-color: black;
+    border: 3px;
+    border-color: #00ff91;
+    color: #00ff91;
+    padding: 15px 32px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+}
+
+.adjust-tempo-btn {
+    width: 10px;
+    height: 10px;
+    padding: 10px;
+    border-radius: 50%;
+    color: #00ff91;
+    border: 1px solid #00ff91;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.adjust-tempo-btn:hover {
+    background-color: #00ff91;
+    color: black;
+    transition: .2s;
+}
+
+.slider {
+    -web-appearance: none;
+    appearance: none;
+    background: #00ff91;
+    outline: black;
+    transition: .2s;
+    opacity: .7;
+    cursor: pointer;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: white;
+    opacity: 1;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: white;
+    opacity: 1;
+    cursor: pointer;
+}
