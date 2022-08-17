@@ -28,8 +28,15 @@
             <h2>TIMER</h2>
             <div class="timer-container">
                 <div class="timer-btn">
-                    <button class="timer-btn-start" id="timer-start">START</button>
+                    <button class="timer-btn-start-pause" id="timer-start-pause">START</button>
                     <button class="timer-btn-reset" id="timer-reset">RESET</button>
+                </div>
+                <div class="timer-duration-radio">
+                    <input class="timer-duration" type="radio" name="timer-duration" value="1" id="timer-duration" checked>1
+                    <input class="timer-duration" type="radio" name="timer-duration" value="5" id="timer-duration">5
+                    <input class="timer-duration" type="radio" name="timer-duration" value="10" id="timer-duration">10
+                    <input class="timer-duration" type="radio" name="timer-duration" value="15" id="timer-duration">15
+                    <input class="timer-duration" type="radio" name="timer-duration" value="20" id="timer-duration">20
                 </div>
                 <span class="timer-display" id="timer-display"></span>
             </div>

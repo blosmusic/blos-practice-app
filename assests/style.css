@@ -32,7 +32,7 @@ body {
     width: auto;
 }
 
-.timer-btn-start,
+.timer-btn-start-pause,
 .timer-btn-reset,
 .onoff-button {
     width: 100px;
