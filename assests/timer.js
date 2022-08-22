@@ -6,7 +6,7 @@ let duration = 60;
 let durationSelected;
 let timerIsPaused = false;
 
-timerDisplay.innerHTML = "00:00";
+timerDisplay.innerText = "00:00";
 
 timerDuration.forEach(function (durationSelected) {
   durationSelected.oninput = function () {
@@ -38,11 +38,28 @@ function startTimer(duration, display) {
       display.textContent = minutes + ":" + seconds;
 
       if (--timer < 0) {
-        display.innerHTML = "FINISHED";
+        display.innerText = "FINISHED";
         timerStartPause.innerText = "START";
       }
     }
   }, 1000);
+}
+
+function pauseTimer() {
+  console.log("timer paused");
+  timerIsPaused = true;
+  timerStartPause.innerText = "RESUME";
+}
+
+function resumeTimer() {
+  console.log("timer resumed");
+  timerIsPaused = false;
+  timerStartPause.innerText = "PAUSE";
+}
+
+function resetTimer() {
+  console.log("timer reset");
+  //TODO reset app to default state
 }
 
 timerStartPause.onclick = function () {
@@ -51,27 +68,11 @@ timerStartPause.onclick = function () {
     timerStartPause.innerText = "PAUSE";
   } else if (timerStartPause.innerText === "PAUSE") {
     pauseTimer();
-    timerStartPause.innerText = "RESUME";
   } else if (timerStartPause.innerText === "RESUME") {
     resumeTimer();
-    timerStartPause.innerText = "PAUSE";
   }
 };
 
-function pauseTimer() {
-  console.log("timer paused");
-  timerIsPaused = true;
-}
-
-function resumeTimer() {
-  console.log("timer resumed");
-  timerIsPaused = false;
-}
-
 timerReset.onclick = function () {
-  console.log("timer reset");
-  timerDisplay.innerHTML = "00:00";
-  timerStartPause.innerText = "START";
-  timerIsPaused = true;
-  clearInterval(startTimer(duration, timerDisplay));
+  resetTimer();
 };
