@@ -61,13 +61,11 @@ timerStartPause.onclick = function () {
 function pauseTimer() {
   console.log("timer paused");
   timerIsPaused = true;
-  // duration = timer.textContent;
 }
 
 function resumeTimer() {
   console.log("timer resumed");
   timerIsPaused = false;
-  // duration = timer.textContent;
 }
 
 timerReset.onclick = function () {
@@ -75,5 +73,5 @@ timerReset.onclick = function () {
   timerDisplay.innerHTML = "00:00";
   timerStartPause.innerText = "START";
   timerIsPaused = true;
-  clearTimeout(startTimer(duration, timerDisplay));
+  clearInterval(startTimer(duration, timerDisplay));
 };
