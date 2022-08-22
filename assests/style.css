@@ -11,8 +11,8 @@ body {
     height: 100vu;
     padding: 10px;
     background-color: black;
-    color: #00ff91;
-    border: 3px solid #00ff91;
+    color: #00ff9f;
+    border: 3px solid #00ff9f;
     opacity: 0.8;
     display: flex;
     text-align: center;
@@ -38,9 +38,9 @@ body {
     width: 100px;
     height: 100px;
     background-color: black;
-    border: 1px solid #00ff91;
+    border: 1px solid #00ff9f;
     border-radius: 50%;
-    color: #00ff91;
+    color: #00ff9f;
     font-weight: bolder;
     text-align: center;
     text-decoration: none;
@@ -50,7 +50,7 @@ body {
 }
 
 .onoff-button:hover {
-    background-color: #00ff91;
+    background-color: #00ff9f;
     color: black;
     transition: .2s;
 }
@@ -63,7 +63,7 @@ body {
     width: 150px;
     height: 30px;
     background-color: black;
-    color: #00ff91;
+    color: #00ff9f;
     text-decoration: none;
     display: inline-block;
 }
@@ -77,8 +77,8 @@ body {
 .tempo-slider {
     background-color: black;
     border: 3px;
-    border-color: #00ff91;
-    color: #00ff91;
+    border-color: #00ff9f;
+    color: #00ff9f;
     padding: 15px 32px;
     text-decoration: none;
     display: inline-block;
@@ -91,14 +91,14 @@ body {
     line-height: 10px;
     padding: 10px;
     border-radius: 50%;
-    color: #00ff91;
-    border: 1px solid #00ff91;
+    color: #00ff9f;
+    border: 1px solid #00ff9f;
     text-decoration: none;
     cursor: pointer;
 }
 
 .adjust-tempo-btn:hover {
-    background-color: #00ff91;
+    background-color: #00ff9f;
     color: black;
     transition: .2s;
 }
@@ -106,7 +106,7 @@ body {
 .slider {
     -web-appearance: none;
     appearance: none;
-    background: #00ff91;
+    background: #00ff9f;
     outline: black;
     transition: .2s;
     opacity: .7;

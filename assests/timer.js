@@ -4,14 +4,16 @@ let timerReset = document.getElementById("timer-reset");
 let timerDuration = document.querySelectorAll('input[name="timer-duration"]');
 let duration = 60;
 let durationSelected;
+let timerIsPaused = false;
 
 timerDisplay.innerHTML = "00:00";
 
 timerDuration.forEach(function (durationSelected) {
-  //clear selected duration
   durationSelected.oninput = function () {
     console.log("user selected: " + durationSelected.value + " minutes");
-    console.log("converted to seconds: " + durationSelected.value * 60 + " seconds");
+    console.log(
+      "converted to seconds: " + durationSelected.value * 60 + " seconds"
+    );
     duration = durationSelected.value * 60;
     let timerView =
       durationSelected.value < 10
@@ -26,16 +28,19 @@ function startTimer(duration, display) {
     minutes,
     seconds;
   setInterval(function () {
-    minutes = parseInt(timer / 60, 10);
-    seconds = parseInt(timer % 60, 10);
+    if (!timerIsPaused) {
+      minutes = parseInt(timer / 60, 10);
+      seconds = parseInt(timer % 60, 10);
 
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
 
-    display.textContent = minutes + ":" + seconds;
+      display.textContent = minutes + ":" + seconds;
 
-    if (--timer < 0) {
-      display.innerHTML = "FINISHED";
+      if (--timer < 0) {
+        display.innerHTML = "FINISHED";
+        timerStartPause.innerText = "START";
+      }
     }
   }, 1000);
 }
@@ -44,19 +49,31 @@ timerStartPause.onclick = function () {
   if (timerStartPause.innerText === "START") {
     startTimer(duration, timerDisplay);
     timerStartPause.innerText = "PAUSE";
-  } else {
+  } else if (timerStartPause.innerText === "PAUSE") {
     pauseTimer();
-    timerStartPause.innerText = "START";
+    timerStartPause.innerText = "RESUME";
+  } else if (timerStartPause.innerText === "RESUME") {
+    resumeTimer();
+    timerStartPause.innerText = "PAUSE";
   }
-}
-
-timerReset.onclick = function () {
-  timerDisplay.innerHTML = "00:00";
-  timerStartPause.innerText = "START";
 };
 
 function pauseTimer() {
   console.log("timer paused");
-  duration = timer.textContent;
-  clearTimeout(timer);
+  timerIsPaused = true;
+  // duration = timer.textContent;
 }
+
+function resumeTimer() {
+  console.log("timer resumed");
+  timerIsPaused = false;
+  // duration = timer.textContent;
+}
+
+timerReset.onclick = function () {
+  console.log("timer reset");
+  timerDisplay.innerHTML = "00:00";
+  timerStartPause.innerText = "START";
+  timerIsPaused = true;
+  clearTimeout(startTimer(duration, timerDisplay));
+};
