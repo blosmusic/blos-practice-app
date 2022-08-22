@@ -39,7 +39,7 @@ function startTimer(duration, display) {
 
       if (--timer < 0) {
         display.innerText = "FINISHED";
-        timerStartPause.innerText = "START";
+        resetTimer();
       }
     }
   }, 1000);
