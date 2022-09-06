@@ -22,6 +22,27 @@ body {
     user-select: none;
 }
 
+.tuner-btn {
+    width: 350px;
+    height: 90px;
+    background-color: #000;
+    border: 1px solid #00ff9f;
+    border-radius: 10%;
+    cursor: pointer;
+}
+
+.tuner-indication {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background-color: red;
+    color: #00ff9f;
+    font-size: 18px;
+    border: 2px solid #00ff9f;
+    cursor: pointer;
+    margin: 5px;
+}
+
 .timer-display,
 .bpm-display {
     font-size: 50px;
