@@ -35,10 +35,10 @@ let synth;
 let loop = new Tone.Sequence(
   function (time, col) {
     console.log(col);
-    synth.triggerAttackRelease("C2", "64n");
+    synth.triggerAttackRelease("A4", "32n");
   },
   [0, 1, 2, 3],
-  "8n"
+  "4n"
 ).start(0);
 
 Tone.Transport.on("stop", function () {
