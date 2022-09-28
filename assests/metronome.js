@@ -29,7 +29,8 @@ let updateMetronome = function () {
   Tone.Transport.bpm.value = tempoSlider.value;
 };
 
-// todo modify array to change time signature with user input
+// todo modify array to change beats per measure in array - current ln 41 [0, 1, 2, 3]
+// todo add a way to change the rhythmic value - current ln 42 1/4
 
 let synth;
 let loop = new Tone.Sequence(
