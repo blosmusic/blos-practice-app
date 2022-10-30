@@ -1,6 +1,10 @@
 let tunerButton = document.getElementById("tuner-indication");
 let tunerIsRunning = false;
 
+const audioContext = new AudioContext();
+const mic = new Tone.UserMedia();;
+let pitch;
+
 tunerButton.onclick = function () {
   if (!tunerIsRunning) {
     startTuner();
@@ -13,8 +17,19 @@ function startTuner() {
   console.log("tuner started");
   tunerButton.innerText = "STOP";
   tunerIsRunning = true;
-  activeTuner();
   document.getElementById("tuner-indication").style.backgroundColor = "black";
+  
+  mic
+  .open()
+  .then(() => {
+    console.log("mic opened");
+    startPitch();
+    processAudioInputLevel();
+  })
+    .catch((e) => {
+      console.log("mic error", e);
+    });
+
 }
 
 function stopTuner() {
@@ -22,34 +37,37 @@ function stopTuner() {
   tunerIsRunning = false;
   tunerButton.innerText = "START";
   document.getElementById("tuner-indication").style.backgroundColor = "red";
+  mic.close();
 }
 
-function activeTuner() {
-  console.log("tuner is running");
-  if (tunerIsRunning === true) {
-    console.log("fft data");
-    //todo create functional fft analysis
-    // let audioContext = new AudioContext();
-    // let analyser = audioContext.createAnalyser();
-    // let microphone = audioContext.createMediaStreamSource(stream);
-    // let javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
-    // analyser.smoothingTimeConstant = 0.3;
-    // analyser.fftSize = 1024;
-    // microphone.connect(analyser);
-    // analyser.connect(javascriptNode);
-    // javascriptNode.connect(audioContext.destination);
-    // javascriptNode.onaudioprocess = function () {
-    //     let array = new Uint8Array(analyser.frequencyBinCount);
-    //     analyser.getByteFrequencyData(array);
-    //     let values = 0;
-    //     let length = array.length;
-    //     for (let i = 0; i < length; i++) {
-    //     values += array[i];
-    //     }
-    //     let average = values / length;
-    //     console.log(Math.round(average));
-    // };
-  }
+function processAudioInputLevel() {
+  console.log("processAudioInputLevel called");
+  inputLevelValueRead = meter.getValue().toFixed(2);
+  // print the incoming mic levels in decibels
+  console.log("The Decibel level is:", inputLevelValueRead, "dB");
+}
+
+function startPitch() {
+  pitch = ml5.pitchDetection("./model/", audioContext, mic.stream, modelLoaded);
+}
+
+function modelLoaded() {
+  // select("#tuner-indication").html("Model Loaded");
+  console.log("model loaded");
+  getPitch();
+}
+
+function getPitch() {
+  pitch.getPitch(function (err, frequency) {
+    if (frequency) {
+      console.log(frequency, "Hz");
+      // select("#tuner-indication").html(frequency);
+    } else {
+      console.log("no pitch");
+      // select("#tuner-indication").html("No pitch detected");
+    }
+    getPitch();
+  });
 }
 
 // navigator.permissions.query({ name: "microphone" }).then(function (result) {
