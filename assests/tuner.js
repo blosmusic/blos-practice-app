@@ -40,7 +40,10 @@ function stopTuner() {
 }
 
 // todo compare pitch to closest note in chromatic scale and display note name 
-
+function  comparePitchToNote() {
+  console.log("pitch", pitch);
+  
+}
 
 // todo check if note is in key and display note name in green if it is, red if it isn't
 
