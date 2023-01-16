@@ -94,9 +94,9 @@ body {
 }
 
 .bpm-container {
-    width: 150px;
-    height: 30px;
-    background-color: #333;
+    width: 120px;
+    height: 70px;
+    padding: 10px;
     color: #00ff9f;
     text-decoration: none;
     display: inline-block;
