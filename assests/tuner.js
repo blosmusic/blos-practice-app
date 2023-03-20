@@ -2,7 +2,7 @@ let tunerButton = document.getElementById("tuner-indication");
 let tunerIsRunning = false;
 
 const audioContext = new AudioContext();
-const mic = new Tone.UserMedia();;
+const mic = new Tone.UserMedia();
 let pitch;
 
 tunerButton.onclick = function () {
