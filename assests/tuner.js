@@ -1,9 +1,53 @@
 let tunerButton = document.getElementById("tuner-indication");
 let tunerIsRunning = false;
 
-const audioContext = new AudioContext();
-const mic = new Tone.UserMedia();
-let pitch;
+let closestNote = -1;
+let recordDifference = Infinity;
+
+let notes = [
+  {
+    instrument: "GUITAR",
+    note: "E",
+    freq: 82.41,
+  },
+  {
+    instrument: "GUITAR",
+    note: "A",
+    freq: 110,
+  },
+  {
+    instrument: "GUITAR",
+    note: "D",
+    freq: 146.83,
+  },
+  {
+    instrument: "GUITAR",
+    note: "G",
+    freq: 196,
+  },
+  {
+    instrument: "GUITAR",
+    note: "B",
+    freq: 246.94,
+  },
+  {
+    instrument: "GUITAR",
+    note: "e",
+    freq: 329.63,
+  },
+];
+
+// ml5 code from https://learn.ml5js.org/#/reference/pitch-detection
+let model_url =
+  "https://cdn.jsdelivr.net/gh/ml5js/ml5-data-and-models/models/pitch-detection/crepe";
+
+document
+  .getElementById("tuner-indication")
+  .addEventListener("click", async () => {
+    await Tone.start();
+    document.querySelector("h4").innerText = "Permission Granted";
+    console.log("audio is ready");
+  });
 
 tunerButton.onclick = function () {
   if (!tunerIsRunning) {
@@ -18,37 +62,79 @@ function startTuner() {
   tunerButton.innerText = "STOP";
   tunerIsRunning = true;
   document.getElementById("tuner-indication").style.backgroundColor = "#00ff9f";
-  
-  mic
-  .open()
-  .then(() => {
-    console.log("mic opened");
-    // what to do with the mic
-  })
-    .catch((e) => {
-      console.log("mic error", e);
-    });
 
+  setup();
 }
 
 function stopTuner() {
-  console.log("tuner stopped");
+  console.log("tuner stopped, mic closed");
   tunerButton.innerText = "START";
   tunerIsRunning = false;
   document.getElementById("tuner-indication").style.backgroundColor = "red";
-  mic.close();
+  audioContext.close();
 }
 
-// todo compare pitch to closest note in chromatic scale and display note name 
-function  comparePitchToNote() {
-  console.log("pitch", pitch);
-  
+async function setup() {
+  audioContext = new AudioContext();
+  stream = await navigator.mediaDevices.getUserMedia({
+    audio: true,
+    video: false,
+  });
+  startPitch(stream, audioContext);
+}
+
+function startPitch(stream, audioContext) {
+  pitch = ml5.pitchDetection(model_url, audioContext, stream, modelLoaded);
+}
+
+function modelLoaded() {
+  getPitch();
+}
+
+function getPitch() {
+  pitch.getPitch(function (err, frequency) {
+    if (frequency) {
+      frequency = frequency.toFixed(3);
+      noteValueOfFrequency(frequency);
+      document.querySelector("#result").textContent = frequency;
+      console.log(
+        "ml5 frequency is:",
+        frequency,
+        "Hz",
+        "\t",
+        "note:",
+        noteValueOfFrequency(frequency)
+      );
+    } else if (err) {
+      err = "No pitch detected";
+      document.querySelector("#result").textContent = err;
+      console.log("ml5:", err);
+    }
+    getPitch();
+    // comparePitchToNote();
+  });
+}
+
+function noteValueOfFrequency(frequencyValue) {
+  frequencyValue = Tone.Frequency(frequencyValue, "hz").toNote();
+  document.querySelector("#value").textContent = frequencyValue;
+  return frequencyValue;
+}
+
+// todo compare pitch to closest note in chromatic scale and display note name
+function comparePitchToNote() {
+  for (let i = 0; i < notes.length; i++) {
+    let diff = frequency - notes[i].freq;
+    if (abs(diff) < abs(recordDifference)) {
+      closestNote = notes[i];
+      recordDifference = diff;
+    }
+  }
+  console.log(closestNote);
 }
 
 // todo check if note is in key and display note name in green if it is, red if it isn't
 
-
 // todo highlight flat or sharp indicator if note is flat or sharp
-
 
 // measure the difference in pitch as cents and display
