@@ -3,6 +3,7 @@ let tunerIsRunning = false;
 
 let closestNote = -1;
 let recordDifference = Infinity;
+// let frequency = 0;
 
 let notes = [
   {
@@ -105,13 +106,13 @@ function getPitch() {
         "note:",
         noteValueOfFrequency(frequency)
       );
+      comparePitchToNote(frequency);
     } else if (err) {
       err = "No pitch detected";
       document.querySelector("#result").textContent = err;
       console.log("ml5:", err);
     }
     getPitch();
-    // comparePitchToNote();
   });
 }
 
@@ -121,14 +122,29 @@ function noteValueOfFrequency(frequencyValue) {
   return frequencyValue;
 }
 
-// todo compare pitch to closest note in chromatic scale and display note name
-function comparePitchToNote() {
+// todo compare pitch to closest note in scale and display note
+function comparePitchToNote(frequency) {
   for (let i = 0; i < notes.length; i++) {
     let diff = frequency - notes[i].freq;
-    if (abs(diff) < abs(recordDifference)) {
+    console.log("freq is:", frequency, "diff is:", diff);
+    if (Math.abs(diff) < Math.abs(recordDifference)) {
       closestNote = notes[i];
       recordDifference = diff;
     }
+
+    console.log("closest note is:", closestNote.note);
+    // if (diff == 0) {
+    //   break;
+    // }
+
+    // if (diff < 0) {
+    //   closestNote = notes[i - 1];
+    //   break;
+    // }
+
+    // if (diff > 0) {
+    //   closestNote = notes[i];
+    // }
   }
   console.log(closestNote);
 }
