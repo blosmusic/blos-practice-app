@@ -3,7 +3,6 @@ let tunerIsRunning = false;
 
 let closestNote = -1;
 let recordDifference = Infinity;
-// let frequency = 0;
 
 let notes = [
   {
@@ -60,7 +59,7 @@ tunerButton.onclick = function () {
 
 function startTuner() {
   console.log("tuner started");
-  tunerButton.innerText = "STOP";
+  tunerButton.innerText = "O";
   tunerIsRunning = true;
   document.getElementById("tuner-indication").style.backgroundColor = "#00ff9f";
 
@@ -69,7 +68,7 @@ function startTuner() {
 
 function stopTuner() {
   console.log("tuner stopped, mic closed");
-  tunerButton.innerText = "START";
+  tunerButton.innerText = "I";
   tunerIsRunning = false;
   document.getElementById("tuner-indication").style.backgroundColor = "red";
   audioContext.close();
@@ -124,33 +123,52 @@ function noteValueOfFrequency(frequencyValue) {
 
 // todo compare pitch to closest note in scale and display note
 function comparePitchToNote(frequency) {
+  // todo find closest note
+  // closestNote
   for (let i = 0; i < notes.length; i++) {
     let diff = frequency - notes[i].freq;
-    console.log("freq is:", frequency, "diff is:", diff);
     if (Math.abs(diff) < Math.abs(recordDifference)) {
       closestNote = notes[i];
       recordDifference = diff;
     }
-
-    console.log("closest note is:", closestNote.note);
-    // if (diff == 0) {
-    //   break;
-    // }
-
-    // if (diff < 0) {
-    //   closestNote = notes[i - 1];
-    //   break;
-    // }
-
-    // if (diff > 0) {
-    //   closestNote = notes[i];
-    // }
+    console.log(
+      "freq is:",
+      frequency,
+      "difference is:",
+      diff,
+      "Hz.",
+      "closest note is:",
+      closestNote.note,
+      "at freq:",
+      closestNote.freq.toFixed(2),
+      "Hz"
+    );
+    // console.log("freq is:", frequency, "difference is:", diff, "notes value", notes[i].freq, "note is:", notes[i].note);
+    checkIfNoteIsInKey(frequency, closestNote.note);
   }
-  console.log(closestNote);
+
+  // todo display closest note
+  document.querySelector("#tuner-indication").textContent = closestNote.note;
+  
 }
 
 // todo check if note is in key and display note name in green if it is, red if it isn't
-
-// todo highlight flat or sharp indicator if note is flat or sharp
-
-// measure the difference in pitch as cents and display
+function checkIfNoteIsInKey(note, frequency) {
+  // todo check if note is in key
+  switch (true) {
+    case frequency === note:
+    console.log("note is in key");
+    document.querySelector("#note-sharp", "#note-flat").style.color = "#00ff9f";
+    break;
+    case frequency < note:
+    console.log("note is flat");
+    document.querySelector("#note-flat").style.color = "yellow";
+    break;
+    case frequency > note:
+    console.log("note is sharp");
+    document.querySelector("#note-sharp").style.color = "red";
+    break;
+    default:
+    document.querySelector("#note-sharp", "#note-flat").style.color = "#00ff9f";
+  }
+}
