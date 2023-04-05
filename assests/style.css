@@ -4,6 +4,10 @@ body {
     color: #262626;
 }
 
+h2 {
+    text-transform: uppercase;
+}
+
 .tuner-section,
 .timer-section,
 .metronome-section {
@@ -36,8 +40,8 @@ body {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background-color: red;
-    color: #333;
+    background-color: darkred;
+    color: grey;
     font-size: 50px;
     font-weight: bolder;
     border: 2px solid #00ff9f;
@@ -55,6 +59,22 @@ body {
     font-weight: bold;
     margin: 15px;
     padding: 20px;
+}
+
+.note-pitches {
+    font-size: 50px;
+    font-weight: bold;
+    margin: 5px;
+    padding: 10px;
+    display: flex;
+}
+
+.note-pitches-btn {
+    width: 80px;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #00ff9f;
+    border-radius: 50%;
 }
 
 .timer-display,
@@ -199,6 +219,19 @@ body {
         font-size: 20px;
         margin: 5px;
         padding: 10px;
+    }
+
+    .note-pitches {
+        width: 100%;
+        font-size: 20px;
+        margin: 5px;
+        padding: 10px;
+    }
+
+    .note-pitches-btn {
+        width: 30px;
+        padding: 5px;
+        margin: 5px;
     }
     
     .timer-display,

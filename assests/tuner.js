@@ -3,32 +3,32 @@ let tunerIsRunning = false;
 
 let notes = [
   {
-    instrument: "GUITAR",
+    mode: "GUITAR",
     note: "E",
     freq: 82.41,
   },
   {
-    instrument: "GUITAR",
+    mode: "GUITAR",
     note: "A",
     freq: 110,
   },
   {
-    instrument: "GUITAR",
+    mode: "GUITAR",
     note: "D",
     freq: 146.83,
   },
   {
-    instrument: "GUITAR",
+    mode: "GUITAR",
     note: "G",
     freq: 196,
   },
   {
-    instrument: "GUITAR",
+    mode: "GUITAR",
     note: "B",
     freq: 246.94,
   },
   {
-    instrument: "GUITAR",
+    mode: "GUITAR",
     note: "e",
     freq: 329.63,
   },
