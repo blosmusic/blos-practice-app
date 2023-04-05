@@ -9,7 +9,7 @@ body {
 .metronome-section {
     width: 100vu;
     height: 100vu;
-    padding: 10px;
+    padding: 10px 5px;
     background-color: #262626;
     color: #00ff9f;
     border: 3px solid #00ff9f;
@@ -168,4 +168,90 @@ body {
     background: white;
     opacity: 1;
     cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+    .tuner-section,
+    .timer-section,
+    .metronome-section {
+        width: 95%;
+        height: 100%;
+    }
+    
+    .tuner-btn {
+        width: 100%;
+        height: 100%;
+    }
+
+    .tuner-container {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .tuner-indication {
+        width: 50px;
+        height: 50px;
+        font-size: 30px;
+    }
+    
+    .note-flat,
+    .note-sharp {
+        font-size: 20px;
+        margin: 5px;
+        padding: 10px;
+    }
+    
+    .timer-display,
+    .bpm-display {
+        font-size: 30px;
+    }
+    
+    .timer-btn-start-pause,
+    .timer-btn-reset,
+    .onoff-button {
+        width: 50px;
+        height: 50px;
+        font-size: 10px;
+    }
+    
+    .beat-container {
+        width: 100%;
+    }
+    
+    .bpm-container {
+        width: 100px;
+        height: 50px;
+        padding: 5px;
+        font-size: 10px;
+    }
+    
+    .tempo-slider-container {
+        font-size: 10px;
+    }
+    
+    .tempo-slider {
+        padding: 5px 16px;
+        font-size: 10px;
+    }
+    
+    .adjust-tempo-btn {
+        width: 5px;
+        height: 5px;
+        line-height: 5px;
+        padding: 5px;
+    }
+    
+    .slider {
+        width: 100%;
+    }
+    
+    .slider::-webkit-slider-thumb {
+        width: 15px;
+        height: 15px;
+    }
+    
+    .slider::-moz-range-thumb {
+        width: 15px;
+        height: 15px;
+    }
 }
