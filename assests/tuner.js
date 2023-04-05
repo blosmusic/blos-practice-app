@@ -180,7 +180,14 @@ pitchBtns.forEach((btn) => {
 
   btn.addEventListener("click", () => {
     // console.log(btn);
-    console.log("Note:", notes[btn.id.slice(-1) - 1].note, "\t", "Frequency:", notes[btn.id.slice(-1) - 1].freq, "Hz");
+    console.log(
+      "Note:",
+      notes[btn.id.slice(-1) - 1].note,
+      "\t",
+      "Frequency:",
+      notes[btn.id.slice(-1) - 1].freq,
+      "Hz"
+    );
     // Tone.js code from https://tonejs.github.io/docs/14.7.77/Synth
     const synth = new Tone.Synth().toDestination();
     synth.triggerAttackRelease(notes[btn.id.slice(-1) - 1].freq, "2n");
