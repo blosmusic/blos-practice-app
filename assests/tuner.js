@@ -3,13 +3,6 @@ let tunerIsRunning = false;
 
 let pitchBtns = document.querySelectorAll(".note-pitches-btn");
 
-let pitchBtn1 = document.getElementById("note-pitches-btn-1");
-let pitchBtn2 = document.getElementById("note-pitches-btn-2");
-let pitchBtn3 = document.getElementById("note-pitches-btn-3");
-let pitchBtn4 = document.getElementById("note-pitches-btn-4");
-let pitchBtn5 = document.getElementById("note-pitches-btn-5");
-let pitchBtn6 = document.getElementById("note-pitches-btn-6");
-
 let notes = [
   {
     mode: "GUITAR",
@@ -187,7 +180,7 @@ pitchBtns.forEach((btn) => {
 
   btn.addEventListener("click", () => {
     // console.log(btn);
-    console.log(notes[btn.id.slice(-1) - 1].freq);
+    console.log("Note:", notes[btn.id.slice(-1) - 1].note, "\t", "Frequency:", notes[btn.id.slice(-1) - 1].freq, "Hz");
     // Tone.js code from https://tonejs.github.io/docs/14.7.77/Synth
     const synth = new Tone.Synth().toDestination();
     synth.triggerAttackRelease(notes[btn.id.slice(-1) - 1].freq, "2n");
