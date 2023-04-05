@@ -52,6 +52,12 @@ h2 {
     text-align: center;
 }
 
+.tuner-indication:hover {
+    background-color: red;
+    color: #00ff9f;
+    transition: .2s;
+}
+
 .note-flat,
 .note-sharp {
     color: grey;
@@ -73,6 +79,7 @@ h2 {
     width: 80px;
     padding: 20px;
     margin: 10px;
+    background-color: #333;
     border: 1px solid #00ff9f;
     border-radius: 50%;
 }
@@ -104,7 +111,8 @@ h2 {
     cursor: pointer;
 }
 
-.onoff-button:hover {
+.onoff-button:hover,
+.note-pitches-btn:hover {
     background-color: #00ff9f;
     color: #333;
     transition: .2s;

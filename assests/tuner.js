@@ -1,6 +1,15 @@
 let tunerButton = document.getElementById("tuner-indication");
 let tunerIsRunning = false;
 
+let pitchBtns = document.querySelectorAll(".note-pitches-btn");
+
+let pitchBtn1 = document.getElementById("note-pitches-btn-1");
+let pitchBtn2 = document.getElementById("note-pitches-btn-2");
+let pitchBtn3 = document.getElementById("note-pitches-btn-3");
+let pitchBtn4 = document.getElementById("note-pitches-btn-4");
+let pitchBtn5 = document.getElementById("note-pitches-btn-5");
+let pitchBtn6 = document.getElementById("note-pitches-btn-6");
+
 let notes = [
   {
     mode: "GUITAR",
@@ -68,7 +77,7 @@ function stopTuner() {
   tunerButton.innerText = "I";
   tunerIsRunning = false;
   audioContext.close();
-  tunerButton.style.backgroundColor = "red";
+  tunerButton.style.backgroundColor = "darkred";
   document.querySelector("#note-flat").style.color = "grey";
   document.querySelector("#note-sharp").style.color = "grey";
 }
@@ -168,3 +177,19 @@ function tunerSuccess() {
   document.querySelector("#note-sharp").style.color = "#00ff9f";
   tunerButton.style.backgroundColor = "#00ff9f";
 }
+
+pitchBtns.forEach((btn) => {
+  for (let i = 0; i < notes.length; i++) {
+    if (btn.id === `note-pitches-btn-${i + 1}`) {
+      btn.textContent = notes[i].note;
+    }
+  }
+
+  btn.addEventListener("click", () => {
+    // console.log(btn);
+    console.log(notes[btn.id.slice(-1) - 1].freq);
+    // Tone.js code from https://tonejs.github.io/docs/14.7.77/Synth
+    const synth = new Tone.Synth().toDestination();
+    synth.triggerAttackRelease(notes[btn.id.slice(-1) - 1].freq, "2n");
+  });
+});
