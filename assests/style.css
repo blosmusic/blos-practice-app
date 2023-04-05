@@ -50,6 +50,7 @@ body {
 
 .note-flat,
 .note-sharp {
+    color: grey;
     font-size: 40px;
     font-weight: bold;
     margin: 15px;

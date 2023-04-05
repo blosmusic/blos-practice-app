@@ -58,7 +58,7 @@ function startTuner() {
   console.log("tuner started");
   tunerButton.innerText = "O";
   tunerIsRunning = true;
-  document.getElementById("tuner-indication").style.backgroundColor = "#00ff9f";
+  tunerButton.style.backgroundColor = "grey";
 
   setup();
 }
@@ -68,8 +68,9 @@ function stopTuner() {
   tunerButton.innerText = "I";
   tunerIsRunning = false;
   audioContext.close();
-  document.getElementById("tuner-indication").style.backgroundColor = "red";
-  document.querySelector("#note-sharp", "#note-flat").style.color = "#00ff9f";
+  tunerButton.style.backgroundColor = "red";
+  document.querySelector("#note-flat").style.color = "grey";
+  document.querySelector("#note-sharp").style.color = "grey";
 }
 
 async function setup() {
@@ -126,7 +127,7 @@ function comparePitchToNote(frequency) {
     }
 
     checkIfNoteIsInKey(frequency, closestNote.note, closestNote.freq);
-    document.querySelector("#tuner-indication").textContent = closestNote.note;
+    tunerButton.textContent = closestNote.note;
   }
 }
 
@@ -148,14 +149,14 @@ function checkIfNoteIsInKey(inputFrequency, noteName, noteFreq) {
   );
   switch (true) {
     case inputFrequency < noteFreq - 1:
-      console.log("note is flat");
-      document.querySelector("#note-flat").style.color = "yellow";
-      document.querySelector("#note-sharp").style.color = "#00ff9f";
+      tunerButton.style.backgroundColor = "gold";
+      document.querySelector("#note-flat").style.color = "gold";
+      document.querySelector("#note-sharp").style.color = "grey";
       break;
     case inputFrequency > noteFreq + 1:
-      console.log("note is sharp");
-      document.querySelector("#note-sharp").style.color = "yellow";
-      document.querySelector("#note-flat").style.color = "#00ff9f";
+      tunerButton.style.backgroundColor = "gold";
+      document.querySelector("#note-sharp").style.color = "gold";
+      document.querySelector("#note-flat").style.color = "grey";
       break;
     default:
       tunerSuccess();
@@ -163,10 +164,7 @@ function checkIfNoteIsInKey(inputFrequency, noteName, noteFreq) {
 }
 
 function tunerSuccess() {
-  console.log("note is in key");
-  document.querySelector("#note-sharp", "#note-flat").style.color = "#00ff9f";
-  const inTune = document.querySelector("#tuner-indication");
-  inTune.style.width = "85px";
-  inTune.style.height = "85px";
-  inTune.transition = "all 0.5s ease-in-out";
+  document.querySelector("#note-flat").style.color = "#00ff9f";
+  document.querySelector("#note-sharp").style.color = "#00ff9f";
+  tunerButton.style.backgroundColor = "#00ff9f";
 }
