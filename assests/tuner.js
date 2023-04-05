@@ -67,8 +67,9 @@ function stopTuner() {
   console.log("tuner stopped, mic closed");
   tunerButton.innerText = "I";
   tunerIsRunning = false;
-  document.getElementById("tuner-indication").style.backgroundColor = "red";
   audioContext.close();
+  document.getElementById("tuner-indication").style.backgroundColor = "red";
+  document.querySelector("#note-sharp", "#note-flat").style.color = "#00ff9f";
 }
 
 async function setup() {
@@ -118,7 +119,7 @@ function comparePitchToNote(frequency) {
   let recordDifference = Infinity;
 
   for (let i = 0; i < notes.length; i++) {
-    let diff = (frequency - notes[i].freq);
+    let diff = frequency - notes[i].freq;
     if (Math.abs(diff) < Math.abs(recordDifference)) {
       closestNote = notes[i];
       recordDifference = diff;
@@ -146,23 +147,26 @@ function checkIfNoteIsInKey(inputFrequency, noteName, noteFreq) {
     noteFreq
   );
   switch (true) {
-    case inputFrequency === noteFreq:
-      console.log("note is in key");
-      document.querySelector("#note-sharp", "#note-flat").style.color =
-        "#00ff9f";
-      break;
-    case inputFrequency < noteFreq:
+    case inputFrequency < noteFreq - 1:
       console.log("note is flat");
       document.querySelector("#note-flat").style.color = "yellow";
       document.querySelector("#note-sharp").style.color = "#00ff9f";
       break;
-    case inputFrequency > noteFreq:
+    case inputFrequency > noteFreq + 1:
       console.log("note is sharp");
       document.querySelector("#note-sharp").style.color = "yellow";
       document.querySelector("#note-flat").style.color = "#00ff9f";
       break;
     default:
-      document.querySelector("#note-sharp", "#note-flat").style.color =
-        "#00ff9f";
+      tunerSuccess();
   }
+}
+
+function tunerSuccess() {
+  console.log("note is in key");
+  document.querySelector("#note-sharp", "#note-flat").style.color = "#00ff9f";
+  const inTune = document.querySelector("#tuner-indication");
+  inTune.style.width = "85px";
+  inTune.style.height = "85px";
+  inTune.transition = "all 0.5s ease-in-out";
 }
