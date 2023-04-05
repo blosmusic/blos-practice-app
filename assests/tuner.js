@@ -61,6 +61,7 @@ function startTuner() {
   tunerButton.innerText = "O";
   tunerIsRunning = true;
   tunerButton.style.backgroundColor = "grey";
+  tunerButton.style.color = "#333";
 
   setup();
 }
