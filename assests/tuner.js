@@ -1,5 +1,6 @@
 let tunerButton = document.getElementById("tuner-indication");
 let tunerIsRunning = false;
+let tonePlaying = null;
 
 let pitchBtns = document.querySelectorAll(".note-pitches-btn");
 
@@ -39,6 +40,10 @@ let notes = [
 // ml5 code from https://learn.ml5js.org/#/reference/pitch-detection
 let model_url =
   "https://cdn.jsdelivr.net/gh/ml5js/ml5-data-and-models/models/pitch-detection/crepe";
+
+// Tone.js code from https://tonejs.github.io/docs/14.7.77/Synth
+const synth = new Tone.Synth().toDestination();
+const now = Tone.now();
 
 document
   .getElementById("tuner-indication")
@@ -189,8 +194,23 @@ pitchBtns.forEach((btn) => {
       notes[btn.id.slice(-1) - 1].freq,
       "Hz"
     );
-    // Tone.js code from https://tonejs.github.io/docs/14.7.77/Synth
-    const synth = new Tone.Synth().toDestination();
-    synth.triggerAttackRelease(notes[btn.id.slice(-1) - 1].freq, "2n");
+
+    if (btn.id === tonePlaying) {
+      synth.triggerRelease(now + 0.5);
+      tonePlaying = null;
+    } else {
+      synth.triggerAttack(notes[btn.id.slice(-1) - 1].freq, now);
+      tonePlaying = btn.id;
+    }
+
+    pitchBtns.forEach((otherBtn) => {
+      if (otherBtn.id !== btn.id || tonePlaying === null) {
+        otherBtn.style.backgroundColor = "";
+        otherBtn.style.color = "";
+      } else if (otherBtn.id === btn.id) {
+        otherBtn.style.backgroundColor = "#00ff9f";
+        otherBtn.style.color = "#333";
+      }
+    });
   });
 });
